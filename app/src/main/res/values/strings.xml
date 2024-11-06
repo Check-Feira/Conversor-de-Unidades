@@ -1,3 +1,25 @@
+
+
+
 <resources>
     <string name="app_name">ApplicationConvesor</string>
+
+    <string-array name="unidadeInput_array">
+        <item>Centimetros</item>
+        <item>Metros</item>
+        <item>Kilometos</item>
+        <item>Milhas</item>
+
+    </string-array>
+    <string-array name="unidadeExit_array">
+        <item>Centimetros</item>
+        <item>Metros</item>
+        <item>Kilometos</item>
+        <item>Milhas</item>
+
+    </string-array>
+
+
 </resources>
+
+
