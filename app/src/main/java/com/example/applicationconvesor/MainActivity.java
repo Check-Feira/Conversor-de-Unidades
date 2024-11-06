@@ -16,7 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     double valueUnidade;
     double auxiliar;
-
+    Spinner unidadeInicial;
+    Spinner unidadedeTrasformada;
+    TextView  resultValue;
+    EditText  valueInpuntunidade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,25 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-
-
-        });
-
-
-
-    }
-    public void  CoverterValores(View view){
-
-        TextView  resultValue;
-        EditText  valueInpuntunidade;
-        Spinner spinner = (Spinner) findViewById(R.id.unidade_imput);
-        Spinner spinner2 = (Spinner) findViewById(R.id.unidade_exit);
-        valueInpuntunidade = findViewById(R.id.valueInput);
-        resultValue = findViewById(R.id.valor_Resultado);
+        unidadeInicial = (Spinner) findViewById(R.id.unidade_imput);
+        unidadedeTrasformada = (Spinner) findViewById(R.id.unidade_exit);
+        valueInpuntunidade =(EditText) findViewById(R.id.valueInput);
+        resultValue = (TextView) findViewById(R.id.valor_Resultado);
 
 
 
@@ -62,11 +50,80 @@ public class MainActivity extends AppCompatActivity {
 // Specify the layout to use when the list of choices appears.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner.
-        spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter2);
-        valueUnidade = Double.parseDouble(valueInpuntunidade.getText().toString());
-        auxiliar = valueUnidade * 5;
-        resultValue.setText("VALOR: "+ String.format("%.2f",auxiliar));
+        unidadeInicial.setAdapter(adapter);
+        unidadedeTrasformada.setAdapter(adapter2);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+
+
+        });
+
+
+
+    }
+    public void  CoverterValores(View view){
+
+         valueUnidade = Double.parseDouble(valueInpuntunidade.getText().toString());
+        if (unidadeInicial.getSelectedItem() == unidadedeTrasformada.getSelectedItem()){
+            auxiliar = valueUnidade * 1 ;
+            resultValue.setText("VALOR: "+ String.format("%.2f",auxiliar)  );
+
+        } else if (unidadeInicial.getSelectedItem().equals("Centimetros") && unidadedeTrasformada.getSelectedItem().equals("Metros")){
+            auxiliar = valueUnidade / 100;
+            resultValue.setText("VALOR: "+ String.format("%.8f",auxiliar)+"m");
+
+        } else if (unidadeInicial.getSelectedItem().equals("Centimetros") && unidadedeTrasformada.getSelectedItem().equals("Kilometros")) {
+            auxiliar = valueUnidade / 100000;
+            resultValue.setText("VALOR: "+ String.format("%.8f",auxiliar)+"km");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Centimetros") && unidadedeTrasformada.getSelectedItem().equals("Milhas")) {
+            auxiliar = valueUnidade / 160934;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Mi");
+
+        } else if (unidadeInicial.getSelectedItem().equals("Metros") && unidadedeTrasformada.getSelectedItem().equals("Centimetros")) {
+            auxiliar = valueUnidade * 100;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"cm");
+
+        } else if (unidadeInicial.getSelectedItem().equals("Metros") && unidadedeTrasformada.getSelectedItem().equals("Kilometros")) {
+            auxiliar = valueUnidade / 1000;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Km");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Metros") && unidadedeTrasformada.getSelectedItem().equals("Milhas")) {
+            auxiliar = valueUnidade / 1609;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Mi");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Kilometros") && unidadedeTrasformada.getSelectedItem().equals("Centimetros")) {
+            auxiliar = valueUnidade * 100000;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+ "cm");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Kilometros") && unidadedeTrasformada.getSelectedItem().equals("Metros")) {
+            auxiliar = valueUnidade * 1000;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"m");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Kilometros") && unidadedeTrasformada.getSelectedItem().equals("Milhas")) {
+            auxiliar = valueUnidade / 1.609;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Mi");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Milhas") && unidadedeTrasformada.getSelectedItem().equals("Centimetros")) {
+            auxiliar = valueUnidade *  160934;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"cm");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Milhas") && unidadedeTrasformada.getSelectedItem().equals("Metros")) {
+            auxiliar = valueUnidade * 1609;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"m");
+
+        }else if (unidadeInicial.getSelectedItem().equals("Milhas") && unidadedeTrasformada.getSelectedItem().equals("Kilometros")) {
+            auxiliar = valueUnidade * 1.609;
+            resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Km");
+
+        }
+
+
+
+
     }
 
 
