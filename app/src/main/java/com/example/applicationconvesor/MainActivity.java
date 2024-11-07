@@ -120,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
             resultValue.setText("VALOR: " + String.format("%.8f", auxiliar)+"Km");
 
         }
-
-
-
+        
 
     }
 
